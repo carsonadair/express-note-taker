@@ -1,27 +1,35 @@
-const express = require(`express`);
-const dbData = require(`./db/db.json`);
-const uuid = require(`./helper/uuid`)
-
+const express = require('express');
+const path = require('path');
+const api = require('./routes/index.js');
 const app = express();
-const PORT = 3001
 
-//middleware
+const PORT = process.env.PORT || 3002;
+
+// This is the middlewear
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api', api);
 
-app.use(express.static(`public`));
+app.use(express.static('public'));
 
-app.get('/public/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+
+// This is the GET route
+app.get('/', (req, res)=> {
+  res.sendFile(path.join(__dirname, './public/index.html'))
 });
 
-app.get('/public/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'notes.html'));
+// This is the GET route to notes
+  app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+  });
+
+
+// This returns to the main page
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-app.get('/api/notes', (req, res) => res.json(dbData));
 
-
-app.listen(PORT, () =>
-    console.log(`Example app listening at http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`);
+});

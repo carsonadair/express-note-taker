@@ -9,6 +9,6 @@ Here are screenshots of the deployed application.
 
 ![The app homepage](./images/1.png)
 ![The note taking page to input notes](./images/2.png)
-![The note input and saved](./images/3.png)
+![The note input and saved](./images/3.png)d
 ![The note revisited after it is saved to the list](./images/4.png)
 ![The page after the note has been deleted](./images/5.png)
